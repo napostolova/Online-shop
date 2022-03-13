@@ -29,7 +29,12 @@
           >CONTACT</router-link
         ></el-menu-item
       >
-    </el-menu>
+       <el-menu-item index="6"
+        ><router-link to="/new-product" class="link"
+          >ADD PRODUCT</router-link
+        ></el-menu-item
+      >
+    </el-menu>    
   </div>
 </template>
 
