@@ -14,10 +14,10 @@
         <el-input v-model="ruleForm.email"></el-input>
       </el-form-item>
       <el-form-item label="Password" prop="password">
-        <el-input v-model="ruleForm.password"></el-input>
+        <el-input  type="password" v-model="ruleForm.password"></el-input>
       </el-form-item>
       <el-form-item label="Confirm Password" prop="repeatPass">
-        <el-input v-model="ruleForm.repeatPass"></el-input>
+        <el-input  type="password" v-model="ruleForm.repeatPass"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm('ruleForm')"
@@ -84,6 +84,7 @@ export default {
           let { username, email, password } = { ...this.ruleForm };
           const data = { username, email, password };
          fetchRegister(data);
+      
         } else {
           console.log("error submit!!");
           return false;

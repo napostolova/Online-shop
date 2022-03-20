@@ -34,7 +34,7 @@ export async function getAllProducts() {
 }
 
 export async function getOneById(id) {
-    let response = await fetch(`http://localhost:4000/api/products`/+id);
+    let response = await fetch(`http://localhost:4000/api/products/${id}`);
 
     try {
         let result = await response.json();

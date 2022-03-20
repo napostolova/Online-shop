@@ -15,7 +15,7 @@
         ></el-menu-item
       >
       <el-menu-item index="3"
-        ><router-link to="/offers" class="link"
+        ><router-link to="/products" class="link"
           >OFFERS</router-link
         ></el-menu-item
       >
