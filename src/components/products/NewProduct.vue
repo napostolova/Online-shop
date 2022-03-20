@@ -1,17 +1,33 @@
 <template>
   <div class="container">
+  <h1>Create new product</h1>
     <form class="form" @submit.prevent="onCreate">
       <label for="title" class="label">Title</label>
-      <input type="text" name="title" v-model="formData.title"  class="input" />
+      <input type="text" name="title" v-model="formData.title" class="input" />
 
       <label for="description" class="label">Description</label>
-      <textarea type="text" name="description"  v-model="formData.description" class="input" />
+      <textarea
+        type="text"
+        name="description"
+        v-model="formData.description"
+        class="input"
+      />
 
       <label for="image" class="label">Image</label>
-      <input type="text" name="imageUrl" v-model="formData.imageUrl" class="input" />
+      <input
+        type="text"
+        name="imageUrl"
+        v-model="formData.imageUrl"
+        class="input"
+      />
 
       <label for="category" class="label">Select category</label>
-      <select name="category" id="category" v-model="formData.category" class="input">
+      <select
+        name="category"
+        id="category"
+        v-model="formData.category"
+        class="input"
+      >
         <option value="goblein">Goblein</option>
         <option value="knitting">Knitting</option>
         <option value=""></option>
@@ -19,7 +35,12 @@
       </select>
 
       <label for="price" class="label">Price</label>
-      <input type="number" name="price" v-model="formData.price" class="input" />
+      <input
+        type="number"
+        name="price"
+        v-model="formData.price"
+        class="input"
+      />
 
       <button class="btn">Create</button>
     </form>
@@ -27,31 +48,37 @@
 </template>
 
 <script>
-import {createProduct} from '../../services/product';
+import { createProduct } from "../../services/product";
 
 export default {
-    data() {
-        return {
-            formData: {
-                title: '',
-                description: '',
-                imageUrl: '',
-                category: '',
-                price: 0,
-            }
-
-        }
+  data() {
+    return {
+      formData: {
+        title: "",
+        description: "",
+        imageUrl: "",
+        category: "",
+        price: 0,
+      },
+    };
+  },
+  methods: {
+    onCreate() {
+      console.log("Create");
+      const token= localStorage.getItem('token');
+      createProduct(this.formData, token);
+      this.$router.push("products");
     },
-    methods: {
-        onCreate() {
-            console.log('Create');
-           createProduct(this.formData)
-        }
-    }
+  },
 };
 </script>
 
 <style>
+.container {
+  margin: 50px 0 0 0;
+  display: flex;
+  flex-direction: column;
+}
 .form {
   display: flex;
   flex-direction: column;
@@ -59,7 +86,7 @@ export default {
 }
 .label {
   position: relative;
-  left: -170px;
+  left: -220px;
   top: 25px;
 }
 .input {
@@ -68,10 +95,10 @@ export default {
   border-radius: 7px;
 }
 .btn {
-    background-color: rgb(22, 140, 219);
-    color: white;
-    padding: 10px 50px;
-    border-radius: 10px;
-    font-size: 25px;
+  background-color: rgb(22, 140, 219);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 25px;
 }
 </style>

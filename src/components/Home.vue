@@ -2,7 +2,7 @@
   <div>
     <h1>Welcome</h1>
     <el-carousel height="400px">
-      <el-carousel-item v-for="item in imageAddress" :key="item">
+      <el-carousel-item v-for="item in imageAddress" :key="item.id">
         <div class="img-container"><img class="image" :src="item.image"></div>
       </el-carousel-item>
     </el-carousel>

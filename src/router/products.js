@@ -5,7 +5,8 @@ import NewProduct from '../components/products/NewProduct.vue';
 const productsRoutes = [{
         path: '/new-product',
         name: "newProduct",
-        component: NewProduct
+        component: NewProduct,
+
     },
     {
         path: '/products',

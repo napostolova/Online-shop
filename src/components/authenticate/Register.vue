@@ -84,7 +84,7 @@ export default {
           let { username, email, password } = { ...this.ruleForm };
           const data = { username, email, password };
          fetchRegister(data);
-      
+         this.$router.push("products");      
         } else {
           console.log("error submit!!");
           return false;

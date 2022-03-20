@@ -10,14 +10,17 @@ Vue.use(VueRouter)
 
 const routes = [{
     path: '/',
+    name: 'home',
     component: Home
   },
   {
     path: '/login',
+    name: 'login',
     component: Login
   },
   {
     path: '/register',
+    name: 'register',
     component: Register
   },
  ...productsRoutes,

@@ -23,10 +23,13 @@
 </template>
 
 <script>
-import { fetchLogin } from '../../services/user';
+import { fetchLogin } from "../../services/user";
+import { setItemInLocaleStorage } from "../../utils/useLocaleStorage";
+
 export default {
   data() {
     return {
+      disabled: true,
       ruleForm: {
         email: "",
         password: "",
@@ -50,7 +53,8 @@ export default {
     };
   },
   methods: {
-    submitForm(formName) {
+    async submitForm(formName) {
+      let data = {};
       this.$refs[formName].validate((valid) => {
         if (valid) {
           fetchLogin(this.ruleForm);
@@ -59,6 +63,9 @@ export default {
           return false;
         }
       });
+      data = await fetchLogin(this.ruleForm);
+      setItemInLocaleStorage(data);
+      this.$router.push("products");
     },
   },
 };
