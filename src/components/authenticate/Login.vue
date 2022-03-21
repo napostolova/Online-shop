@@ -24,7 +24,6 @@
 
 <script>
 import { fetchLogin } from "../../services/user";
-import { setItemInLocaleStorage } from "../../utils/useLocaleStorage";
 
 export default {
   data() {
@@ -54,7 +53,6 @@ export default {
   },
   methods: {
     async submitForm(formName) {
-      let data = {};
       this.$refs[formName].validate((valid) => {
         if (valid) {
           fetchLogin(this.ruleForm);
@@ -63,14 +61,14 @@ export default {
           return false;
         }
       });
-      data = await fetchLogin(this.ruleForm);
-      setItemInLocaleStorage(data);
+      const data = await fetchLogin(this.ruleForm);
+      await this.$store.dispatch("getNewUser", data);
       this.$router.push("products");
     },
   },
 };
 </script>
-
+ 
 <style>
 .container {
   display: flex;

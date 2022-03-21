@@ -3,7 +3,7 @@ export async function createProduct(data, token) {
         method: "post",
         headers: {
             "Content-Type": "application/json",
-            'X-Authorization': token  
+            'X-Authorization': token
         },
         body: JSON.stringify(data),
     });
@@ -54,7 +54,7 @@ export async function addFavouriteProduct(id, token) {
         method: "post",
         headers: {
             "Content-Type": "application/json",
-            'X-Authorization': token  
+            'X-Authorization': token
         }
     });
     try {

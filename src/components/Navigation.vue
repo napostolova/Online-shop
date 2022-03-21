@@ -1,24 +1,7 @@
 <template>
   <div>
-    <div v-if="isAuthenticated" class="user">
+    <nav class="nav-menu-main">
       <ul class="nav-menu">
-        <li class="nav-link">Welcome, {{ user.username }}</li>
-        <li v-if="isAdmin" key="6" class="nav-link">
-          <router-link to="/new-product" class="link">ADD PRODUCT</router-link>
-        </li>
-        <li key="7" class="nav-link">
-          <button class="logout-btn" @click="onLogout">Logout</button>
-        </li>
-      </ul>
-    </div>
-    <div v-else class="guest">
-      <ul class="nav-menu">
-        <li key="1" class="nav-link">
-          <router-link to="/login" class="link">LOGIN</router-link>
-        </li>
-        <li key="2" class="nav-link">
-          <router-link to="/register" class="link">REGISTER</router-link>
-        </li>
         <li key="3" class="nav-link">
           <router-link to="/products" class="link">OFFERS</router-link>
         </li>
@@ -29,36 +12,59 @@
           <router-link to="/contact" class="link">CONTACT</router-link>
         </li>
       </ul>
-    </div>
+      <div v-if="isUser.username" class="user">
+        <ul class="nav-menu">
+          <li class="nav-link">Welcome, {{ isUser.username }}</li>
+          <li v-if="isUser.role=='admin'" key="6" class="nav-link">
+            <router-link to="/new-product" class="link"
+              >ADD PRODUCT</router-link
+            >
+          </li>
+          <li key="7" class="nav-link">
+            <router-link to="/user" class="link">My profile</router-link>
+          </li>
+
+          <li key="8" class="nav-link">
+            <button class="logout-btn" @click="onLogout">Logout</button>
+          </li>
+        </ul>
+      </div>
+      <div v-else class="guest">
+        <ul class="nav-menu">
+          <li key="1" class="nav-link">
+            <router-link to="/login" class="link">LOGIN</router-link>
+          </li>
+          <li key="2" class="nav-link">
+            <router-link to="/register" class="link">REGISTER</router-link>
+          </li>
+        </ul>
+      </div>
+    </nav>
   </div>
 </template>
 
 <script>
 import { clearLocalStorage } from "../utils/useLocaleStorage";
-import { logout, getUser, getRole } from "../services/user";
+import { logout } from "../services/user";
 
 export default {
   data() {
     return {
-      user: getUser(),
-      role: getRole(),
+
     };
   },
   computed: {
-    isAuthenticated() {
-      return Boolean(getUser().username);
+    isUser() {
+      return this.$store.getters.getUser;
     },
-    isAdmin() {
-      if (this.role !== 'admin') {
-        return false
-      }
-      return true;
-    },
+   
   },
+
   methods: {
-    onLogout() {
+    async onLogout() {
       clearLocalStorage();
       logout();
+      await this.$store.dispatch("getNewUser", {});
       this.$router.push({ name: "home" });
     },
   },
@@ -66,6 +72,10 @@ export default {
 </script>
 
 <style>
+.nav-menu-main {
+  display: flex;
+  justify-content: space-between;
+}
 .nav-menu {
   display: flex;
 }

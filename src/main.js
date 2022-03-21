@@ -6,6 +6,7 @@ import locale from 'element-ui/lib/locale/lang/en'
 import Vuelidate from 'vuelidate'
 
 import router from './router';
+import store from './store';
 
 Vue.use(Vuelidate);
 
@@ -15,5 +16,6 @@ Vue.use(ElementUI, {locale});
 
 new Vue({
   render: h => h(App),
-  router
+  router,
+  store,
 }).$mount('#app')

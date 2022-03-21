@@ -46,13 +46,13 @@ export const logout = (token) => {
     });
 }
 
-export const getUser = () => {
-    let username = localStorage.getItem('username');
-    let role = localStorage.getItem('role');
-    let token = localStorage.getItem('token');
-    return  {username, role, token};
-}
-export const getRole = () => {
-    let role = localStorage.getItem('role');
-    return role;
-}
+// export const getUser = () => {
+//     let username = localStorage.getItem('username');
+//     let role = localStorage.getItem('role');
+//     let token = localStorage.getItem('token');
+//     return  {username, role, token};
+// }
+// export const getRole = () => {
+//     let role = localStorage.getItem('role');
+//     return role;
+// }
