@@ -54,11 +54,9 @@ export default {
   methods: {
     async submitForm(formName) {
       this.$refs[formName].validate((valid) => {
-        if (valid) {
-          fetchLogin(this.ruleForm);
-        } else {
-          console.log("error submit!!");
-          return false;
+        if (!valid) {
+         console.log("error submit!!");
+          return false; 
         }
       });
       const data = await fetchLogin(this.ruleForm);

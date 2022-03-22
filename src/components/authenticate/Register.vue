@@ -14,10 +14,10 @@
         <el-input v-model="ruleForm.email"></el-input>
       </el-form-item>
       <el-form-item label="Password" prop="password">
-        <el-input  type="password" v-model="ruleForm.password"></el-input>
+        <el-input type="password" v-model="ruleForm.password"></el-input>
       </el-form-item>
       <el-form-item label="Confirm Password" prop="repeatPass">
-        <el-input  type="password" v-model="ruleForm.repeatPass"></el-input>
+        <el-input type="password" v-model="ruleForm.repeatPass"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm('ruleForm')"
@@ -80,16 +80,16 @@ export default {
   methods: {
     async submitForm(formName) {
       this.$refs[formName].validate((valid) => {
-        if (valid) {
-          let { username, email, password } = { ...this.ruleForm };
-          const data = { username, email, password };
-         fetchRegister(data);
-         this.$router.push("products");      
-        } else {
+        if (!valid) {
           console.log("error submit!!");
           return false;
         }
       });
+      let { username, email, password } = { ...this.ruleForm };
+      const data = { username, email, password };
+      const response = await fetchRegister(data);
+      await this.$store.dispatch("getNewUser", response);
+      this.$router.push("products");
     },
   },
 };
