@@ -1,5 +1,7 @@
+const apiUrl = `http://localhost:4000`;
+
 export async function createProduct(data, token) {
-    let response = await fetch(`http://localhost:4000/api/products`, {
+    let response = await fetch(`${apiUrl}/api/products`, {
         method: "post",
         headers: {
             "Content-Type": "application/json",
@@ -21,7 +23,7 @@ export async function createProduct(data, token) {
 }
 
 export async function getAllProducts() {
-    let response = await fetch(`http://localhost:4000/api/products`);
+    let response = await fetch(`${apiUrl}/api/products`);
     try {
         let result = await response.json();
         if (response.ok) {
@@ -35,7 +37,7 @@ export async function getAllProducts() {
 }
 
 export async function getOneById(id) {
-    let response = await fetch(`http://localhost:4000/api/products/${id}`);
+    let response = await fetch(`${apiUrl}/api/products/${id}`);
 
     try {
         let result = await response.json();
@@ -50,7 +52,7 @@ export async function getOneById(id) {
 }
 
 export async function addFavouriteProduct(id, token) {
-    let response = await fetch(`http://localhost:4000/api/products/${id}`, {
+    let response = await fetch(`${apiUrl}/api/products/${id}`, {
         method: "post",
         headers: {
             "Content-Type": "application/json",
@@ -67,5 +69,22 @@ export async function addFavouriteProduct(id, token) {
     } catch (err) {
         console.log(err);
     }
-
+}
+export async function getMyFavouriteProducts(token) {
+    let response = await fetch(`${apiUrl}/api/products/favourites`, {
+        method: "get",
+        headers: {
+            'X-Authorization': token
+        }
+    });
+    try {
+        let result = await response.json();
+        if (response.ok) {
+            return result;
+        } else {
+            throw result.message;
+        }
+    } catch (err) {
+        console.log(err);
+    }
 }

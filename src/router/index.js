@@ -5,6 +5,7 @@ import Login from '../components/authenticate/Login';
 import Register from '../components/authenticate/Register'; 
 
 import productsRoutes from './products';
+import userRoutes from './user';
 
 Vue.use(VueRouter)
 
@@ -24,6 +25,7 @@ const routes = [{
     component: Register
   },
  ...productsRoutes,
+ ...userRoutes
 ]
 
 const router = new VueRouter({

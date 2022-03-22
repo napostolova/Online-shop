@@ -15,16 +15,22 @@
       <div v-if="isUser.username" class="user">
         <ul class="nav-menu">
           <li class="nav-link">Welcome, {{ isUser.username }}</li>
-          <li v-if="isUser.role=='admin'" key="6" class="nav-link">
+          <li v-if="isUser.role == 'admin'" key="6" class="nav-link">
             <router-link to="/new-product" class="link"
               >ADD PRODUCT</router-link
             >
           </li>
           <li key="7" class="nav-link">
-            <router-link to="/user" class="link">My profile</router-link>
+            <router-link to="/favourites" class="link"
+              >My favourites</router-link
+            >
           </li>
-
           <li key="8" class="nav-link">
+            <router-link :to="{ name: 'cart' }" class="link"
+              >My cart</router-link
+            >
+          </li>
+          <li key="9" class="nav-link">
             <button class="logout-btn" @click="onLogout">Logout</button>
           </li>
         </ul>
@@ -49,15 +55,12 @@ import { logout } from "../services/user";
 
 export default {
   data() {
-    return {
-
-    };
+    return {};
   },
   computed: {
     isUser() {
       return this.$store.getters.getUser;
     },
-   
   },
 
   methods: {
@@ -91,7 +94,6 @@ export default {
 .logout-btn {
   background-color: white;
   border-style: none;
-  text-transform: uppercase;
   font-size: 16px;
 }
 .logout-btn:hover {

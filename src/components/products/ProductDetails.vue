@@ -19,7 +19,6 @@
 
 <script>
 import { addFavouriteProduct, getOneById,} from "../../services/product";
-import { getUser,} from "../../services/user";
 
 export default {
   data() {
@@ -34,11 +33,9 @@ export default {
     },
   },
   methods: {
-    onFavourite(id) {
-      console.log(`favourite`, id);
-      const token = getUser().token;
-      console.log(`token ${token}`);
-      addFavouriteProduct(id, token);
+   async onFavourite(id) {
+       const token = localStorage.getItem('token')
+       await addFavouriteProduct(id, token);
 
     }
   },

@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+
 import { setItemInLocaleStorage } from '../utils/useLocaleStorage';
+import productsModule from './products';
+
 
 Vue.use(Vuex)
 
@@ -23,6 +26,9 @@ export default new Vuex.Store({
         async getNewUser(context, data) {
             context.commit('setUser', data)
         }
+    },
+    modules: {
+        productsModule
     }
 
 })
