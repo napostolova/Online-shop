@@ -64,6 +64,9 @@ export default {
 }
 
 .price {
+  font-style: italic;
+  font-weight: 600;
+  font-size: 24px;
   margin-right: 40px;
 }
 </style>

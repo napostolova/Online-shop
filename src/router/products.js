@@ -6,6 +6,16 @@ const productsRoutes = [{
         path: '/new-product',
         name: "newProduct",
         component: NewProduct,
+        beforeEnter: (to, from, next) => {
+            const admin = localStorage.getItem('role')
+            if (admin !== 'admin') {
+                next({
+                    name: 'login'
+                });
+            } else {
+                next();
+            }
+        }
 
     },
     {
@@ -16,7 +26,17 @@ const productsRoutes = [{
     {
         path: '/product-details/:productId',
         name: "productDetails",
-        component: ProductDetails
+        component: ProductDetails,
+        beforeEnter: (to, from, next) => {
+            const user = localStorage.getItem('username')
+            if (to.name !== 'login' && user == 'undefined') {
+                next({
+                    name: 'login'
+                })
+            } else {
+                next();
+            }
+        }
     },
 ]
 

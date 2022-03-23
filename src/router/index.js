@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../components/Home';
 import Login from '../components/authenticate/Login';
 import Register from '../components/authenticate/Register'; 
+import NotFound from '../components/NotFound'; 
 
 import productsRoutes from './products';
 import userRoutes from './user';
@@ -25,7 +26,11 @@ const routes = [{
     component: Register
   },
  ...productsRoutes,
- ...userRoutes
+ ...userRoutes,
+
+ {path: '*',
+ component: NotFound
+}
 ]
 
 const router = new VueRouter({

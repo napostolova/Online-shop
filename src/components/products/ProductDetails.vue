@@ -6,12 +6,20 @@
         <img class="image" :src="product.imageUrl" :alt="product.title" />
       </article>
       <article class="description">{{ product.description }}</article>
-      <span class="price">{{ product.price }} $</span>
+      <span class="price">  $ {{ product.price }}</span>
       <div class="buttons">
-        <button class="btn" @click="onBuyProduct(product._id)">
+        <button
+          class="btn"
+          @click="onBuyProduct(product._id)"
+          :disabled="isAdded"
+        >
           <span class="material-icons"> shopping_cart </span> Add to cart
         </button>
-        <button class="btn" @click="onFavourite(product._id)">
+        <button
+          class="btn"
+          @click="onFavourite(product._id)"
+          :disabled="isFavourited"
+        >
           <span class="material-icons"> favorite_border </span> Add to favourite
         </button>
       </div>
@@ -30,6 +38,8 @@ export default {
   data() {
     return {
       loading: true,
+      isFavourited: false,
+      isAdded: false,
       product: {},
     };
   },
@@ -43,12 +53,13 @@ export default {
       const token = this.$store.getters.getUser.accessToken;
       await this.$store.dispatch("products/setFavouriteProducts", id);
       await addFavouriteProduct(id, token);
+      this.isFavourited = true;
     },
     async onBuyProduct(id) {
       const { accessToken } = this.$store.getters.getUser;
       await buyProduct(id, accessToken);
       await this.$store.dispatch("products/setOrderedProducts", id);
-      console.log(`buy`);
+      this.isAdded = true;
     },
   },
 

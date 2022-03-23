@@ -1,11 +1,9 @@
-
-
 export default {
     namespaced: true,
     state: {
         favouriteProducts: [],
         cart: [],
-    },
+   },
     getters: {
         favourites(state) {
             return state.favouriteProducts
