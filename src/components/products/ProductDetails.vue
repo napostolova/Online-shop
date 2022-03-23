@@ -6,19 +6,25 @@
         <img class="image" :src="product.imageUrl" :alt="product.title" />
       </article>
       <article class="description">{{ product.description }}</article>
-      <div class="info">
-        <span class="price">{{ product.price }} $</span>
-        <button class="favorite" @click="onFavourite(product._id)">
-          <span class="material-icons"> favorite </span>
+      <span class="price">{{ product.price }} $</span>
+      <div class="buttons">
+        <button class="btn" @click="onBuyProduct(product._id)">
+          <span class="material-icons"> shopping_cart </span> Add to cart
+        </button>
+        <button class="btn" @click="onFavourite(product._id)">
+          <span class="material-icons"> favorite_border </span> Add to favourite
         </button>
       </div>
-      <button class="btn">Buy</button>
     </section>
   </div>
 </template>
 
 <script>
-import { addFavouriteProduct, getOneById,} from "../../services/product";
+import {
+  addFavouriteProduct,
+  getOneById,
+  buyProduct,
+} from "../../services/product";
 
 export default {
   data() {
@@ -33,11 +39,17 @@ export default {
     },
   },
   methods: {
-   async onFavourite(id) {
-       const token = localStorage.getItem('token')
-       await addFavouriteProduct(id, token);
-
-    }
+    async onFavourite(id) {
+      const token = this.$store.getters.getUser.accessToken;
+      await this.$store.dispatch("products/setFavouriteProducts", id);
+      await addFavouriteProduct(id, token);
+    },
+    async onBuyProduct(id) {
+      const { accessToken } = this.$store.getters.getUser;
+      await buyProduct(id, accessToken);
+      await this.$store.dispatch("products/setOrderedProducts", id);
+      console.log(`buy`);
+    },
   },
 
   async created() {
@@ -47,8 +59,7 @@ export default {
 };
 </script>
 
-<style>
-
+<style scoped>
 .product-details {
   display: flex;
   flex-direction: column;
@@ -65,25 +76,27 @@ export default {
   margin: 20px;
 }
 .material-icons {
-  color: red;
+  color: white;
   size: 28px;
+  margin-right: 10px;
 }
-.favorite {
-  background-color: white;
-  border-color: white;
-  border-radius: 10px;
-  padding: 10px;
-  border-style: none;
+.buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.favorite:hover {
+.btn:hover {
   cursor: pointer;
 }
 
 .btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   background-color: rgb(22, 140, 219);
   color: white;
-  padding: 5px;
   border-radius: 10px;
-  text-transform: uppercase;
+  border-style: none;
+  margin: 10px 0 10px 0;
 }
 </style>

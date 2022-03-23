@@ -20,9 +20,14 @@ export default {
       products: [],
     };
   },
+  computed: {
+
+  },
   async created() {
-    const token = localStorage.getItem("token");
-    this.products = await getMyFavouriteProducts(token);
+    const {accessToken} = this.$store.getters.getUser;
+    if(accessToken) {
+      this.products = await getMyFavouriteProducts(accessToken);
+    }
     this.loading = false;
   },
 };

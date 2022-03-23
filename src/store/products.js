@@ -1,23 +1,33 @@
 
+
 export default {
     namespaced: true,
     state: {
         favouriteProducts: [],
+        cart: [],
     },
     getters: {
-        myFavourites(state) {
+        favourites(state) {
             return state.favouriteProducts
+        },
+        cart(state) {
+            return state.cart
         }
     },
     mutations: {
-        setMyFavourites(state, newState) {
-            state.favouriteProducts.push(newState) 
+        setFavourites(state, newState) {
+            state.favouriteProducts.push(newState)
+        },
+        setMyOrders(state, orders) {
+            state.cart.push(orders)
         }
-    }, 
+    },
     actions: {
-        async getMyFavourites(context, product) {
-            context.commit('setMyFavourites', product)
+        async setFavouriteProducts(context, product) {
+            context.commit('setFavourites', product)
+        },
+        async setOrderedProducts(context, orders) {
+            context.commit('setMyOrders', orders)
         }
-
     }
 }

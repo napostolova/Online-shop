@@ -70,8 +70,47 @@ export async function addFavouriteProduct(id, token) {
         console.log(err);
     }
 }
+
+export async function buyProduct(id, token) {
+    let response = await fetch(`${apiUrl}/api/products/buy/${id}`, {
+        method: "post",
+        headers: {
+            "Content-Type": "application/json",
+            'X-Authorization': token
+        }
+    });
+    try {
+        let result = await response.json();
+        if (response.ok) {
+            return result;
+        } else {
+            throw result.message;
+        }
+    } catch (err) {
+        console.log(err);
+    }
+}
+
 export async function getMyFavouriteProducts(token) {
     let response = await fetch(`${apiUrl}/api/products/favourites`, {
+        method: "get",
+        headers: {
+            'X-Authorization': token
+        }
+    });
+    try {
+        let result = await response.json();
+        if (response.ok) {
+            return result;
+        } else {
+            throw result.message;
+        }
+    } catch (err) {
+        console.log(err);
+    }
+}
+export async function getOrderedProducts(token) {
+    let response = await fetch(`${apiUrl}/api/products/orders`, {
         method: "get",
         headers: {
             'X-Authorization': token

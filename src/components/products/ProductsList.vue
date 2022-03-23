@@ -21,6 +21,11 @@ export default {
       products: [],
     };
   },
+  computed: {
+    getProducts() {
+      return this.products;
+    },
+  },
 
   async created() {
     this.products = await getAllProducts();
@@ -31,7 +36,6 @@ export default {
 
 <style>
 .list {
-  margin: 90px auto; 
- 
+  margin: 90px auto;
 }
 </style>

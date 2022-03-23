@@ -28,7 +28,7 @@ export default new Vuex.Store({
         }
     },
     modules: {
-        productsModule
+      products:  productsModule
     }
 
 })

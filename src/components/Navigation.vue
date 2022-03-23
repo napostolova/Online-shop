@@ -21,14 +21,23 @@
             >
           </li>
           <li key="7" class="nav-link">
-            <router-link to="/favourites" class="link"
-              >My favourites</router-link
-            >
+            <router-link to="/favourites" class="link">
+              <el-badge
+                v-if="favProducts"
+                :value="favProducts.length"
+                class="item"
+              >
+                <span class="material-icons"> favorite_border </span>
+              </el-badge>
+            </router-link>
           </li>
           <li key="8" class="nav-link">
-            <router-link :to="{ name: 'cart' }" class="link"
-              >My cart</router-link
-            >
+            <router-link to="/cart" class="link">
+              <el-badge v-if="cart"
+                :value="cart.length" class="item">
+                <span class="material-icons"> shopping_cart </span>
+              </el-badge>
+            </router-link>
           </li>
           <li key="9" class="nav-link">
             <button class="logout-btn" @click="onLogout">Logout</button>
@@ -61,6 +70,12 @@ export default {
     isUser() {
       return this.$store.getters.getUser;
     },
+    favProducts() {
+      return this.$store.getters["products/favourites"];
+    },
+    cart(){
+       return this.$store.getters["products/cart"];
+    }
   },
 
   methods: {
@@ -90,6 +105,10 @@ export default {
 .link {
   list-style: none;
   text-decoration: none;
+}
+.material-icons {
+  color: grey;
+  font-size: 28px;
 }
 .logout-btn {
   background-color: white;

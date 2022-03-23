@@ -8,7 +8,7 @@ const userRoutes = [
         component: MyFavouriteProducts
     },
     {
-        path: '/my-cart/:id',
+        path: '/cart',
         name: 'cart',
         component: MyCart
     }
