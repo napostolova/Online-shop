@@ -31,10 +31,12 @@ export async function fetchLogin(data) {
             return result;
 
         } else {
-            throw result.message;
+            console.log(result);
+            return result.message;
         }
     } catch (err) {
         console.log(err);
+         
     }
 }
 
@@ -45,14 +47,3 @@ export const logout = (token) => {
         }
     });
 }
-
-// export const getUser = () => {
-//     let username = localStorage.getItem('username');
-//     let role = localStorage.getItem('role');
-//     let token = localStorage.getItem('token');
-//     return  {username, role, token};
-// }
-// export const getRole = () => {
-//     let role = localStorage.getItem('role');
-//     return role;
-// }

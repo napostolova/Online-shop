@@ -1,20 +1,45 @@
 <template>
   <div id="app">
-    <Navigation/>
+    <Navigation />
+    <el-alert
+      v-if="notification.length > 0"
+      :title="notification[0]"
+      type="error"
+      :close="reset"
+    >
+    
+    </el-alert>
+
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Navigation from './components/Navigation.vue';
+import Navigation from "./components/Navigation.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     Navigation,
-    
+  },
+  computed: {
+    notification() {
+      return this.$store.getters.showNotifications
+    }
+  },
+  methods: {
+    reset(){
+      this.$store.mutations.resetNotifications
+    },
+      open4() {
+        this.$notify.error({
+          title: 'Error',
+          message: 'This is an error message'
+        });
+      },
   }
-}
+  
+};
 </script>
 
 <style>

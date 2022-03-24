@@ -9,9 +9,9 @@
         <img :src="product.imageUrl" class="image" />
       </div>
       <div style="padding: 14px">
-        <span>{{ product.title }}</span>
+        <p>{{ product.title }}</p>
         <div class="bottom clearfix">
-          <span class="price">{{ product.price }} $</span>
+          <p class="price">{{ product.price }} $</p>
         </div>
         <el-button
           type="button"
@@ -54,11 +54,11 @@ export default {
 }
 .el-card {
   width: 300px;
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 .img-container {
-  max-width: 300px;
-}
+   max-width: 100%;
+   }
 .image {
   width: 100%;
 }
@@ -66,7 +66,7 @@ export default {
 .price {
   font-style: italic;
   font-weight: 600;
-  font-size: 24px;
-  margin-right: 40px;
+  font-size: 22px;
+  margin-right: 0px;
 }
 </style>

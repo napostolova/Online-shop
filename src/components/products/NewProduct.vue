@@ -73,7 +73,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .container {
   margin: 50px 0 0 0;
   display: flex;
