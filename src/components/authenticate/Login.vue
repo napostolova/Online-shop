@@ -168,6 +168,7 @@ export default {
   margin: 5px 0 15px 0;
   padding: 15px;
   border-radius: 10px;
+  border-style: solid;
   font-size: 16px;
 }
 .error {
@@ -184,7 +185,7 @@ export default {
 }
 
 .link {
-  color: darkgreen;
+  color: blue;
   font-weight: 600;
   text-decoration: none;
 }

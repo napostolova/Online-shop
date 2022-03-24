@@ -8,12 +8,16 @@ export async function fetchRegister(data) {
         },
         body: JSON.stringify(data),
     });
-    let result = await response.json();
+    try {
+        let result = await response.json();
 
-    if (response.ok) {
-        return result;
-    } else {
-        throw result.message;
+        if (response.ok) {
+            return result;
+        } else {
+            return result.message;
+        }
+    } catch (error) {
+        console.log(error);
     }
 }
 
@@ -31,12 +35,11 @@ export async function fetchLogin(data) {
             return result;
 
         } else {
-            console.log(result);
             return result.message;
         }
     } catch (err) {
         console.log(err);
-         
+
     }
 }
 
