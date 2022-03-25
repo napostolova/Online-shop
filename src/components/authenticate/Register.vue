@@ -199,7 +199,7 @@ export default {
   width: 15vw;
   border-radius: 10px;
   font-size: 18px;
-  background-color: green;
+ background-color: rgb(24, 143, 223);
   color: white;
   letter-spacing: 1px;
   text-align: center;
@@ -237,7 +237,7 @@ export default {
 }
 
 .link {
-  color: darkgreen;
+ color: rgb(24, 143, 223);
   font-weight: 600;
   text-decoration: none;
 }

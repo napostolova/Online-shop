@@ -1,16 +1,11 @@
 <template>
-  <div>
+  <header class="header">
     <nav class="nav-menu-main">
       <ul class="nav-menu">
         <li key="3" class="nav-link">
-          <router-link to="/products" class="link">OFFERS</router-link>
+          <router-link to="/products" class="link">PRODUCTS</router-link>
         </li>
-        <li key="4" class="nav-link">
-          <router-link to="/about" class="link">ABOUT US</router-link>
-        </li>
-        <li key="5" class="nav-link">
-          <router-link to="/contact" class="link">CONTACT</router-link>
-        </li>
+        
       </ul>
       <div v-if="isUser.username" class="user">
         <ul class="nav-menu">
@@ -33,8 +28,7 @@
           </li>
           <li key="8" class="nav-link">
             <router-link to="/cart" class="link">
-              <el-badge v-if="cart"
-                :value="cart.length" class="item">
+              <el-badge v-if="cart" :value="cart.length" class="item">
                 <span class="material-icons"> shopping_cart </span>
               </el-badge>
             </router-link>
@@ -55,7 +49,7 @@
         </ul>
       </div>
     </nav>
-  </div>
+  </header>
 </template>
 
 <script>
@@ -73,9 +67,9 @@ export default {
     favProducts() {
       return this.$store.getters["products/favourites"];
     },
-    cart(){
-       return this.$store.getters["products/cart"];
-    }
+    cart() {
+      return this.$store.getters["products/cart"];
+    },
   },
 
   methods: {
@@ -90,6 +84,11 @@ export default {
 </script>
 
 <style>
+.header {
+  background: orange;
+  font-size: 20px;
+  
+}
 .nav-menu-main {
   display: flex;
   justify-content: space-between;

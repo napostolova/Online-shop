@@ -19,7 +19,7 @@
         <button
           type="button"
           class="btn"
-          @click="onFavourite(product._id)"
+          @click="onFavourite()"
           :disabled="isFavourited"
         >
           <span class="material-icons"> favorite_border </span> Add to favourite
@@ -89,21 +89,20 @@ export default {
     this.loading = false;
   },
   methods: {
-    async onFavourite(id) {
+    async onFavourite() {
       const token = this.$store.getters.getUser.accessToken;
-      await this.$store.dispatch("products/setFavouriteProducts", id);
-      await addFavouriteProduct(id, token);
+      await this.$store.dispatch("products/setFavouriteProducts", this.product);
+      await addFavouriteProduct(this.productId, token);
       this.isFavourited = true;
     },
     async onBuyProduct(id) {
       const { accessToken } = this.$store.getters.getUser;
       await buyProduct(id, accessToken);
-      await this.$store.dispatch("products/setOrderedProducts", id);
+      await this.$store.dispatch("products/setOrderedProducts", this.product);
       this.isAdded = true;
     },
     onToggleDelete() {
-      this.centerDialogVisible = true;
-      
+      this.centerDialogVisible = true;      
     },
     async onDelete() {
       const token = this.$store.getters.getUser.accessToken;

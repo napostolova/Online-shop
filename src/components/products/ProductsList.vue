@@ -37,5 +37,8 @@ export default {
 <style>
 .list {
   margin: 90px auto;
+  display: flex;
+  flex-direction: row
+
 }
 </style>

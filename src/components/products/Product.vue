@@ -53,16 +53,18 @@ export default {
   align-items: stretch;
 }
 .el-card {
-  width: 300px;
-    margin-bottom: 20px;
+  
+  margin-bottom: 20px;
+  flex-grow: 0;
+  flex-basis: 30%;
 }
 .img-container {
-   max-width: 100%;
-   height: 400px;
-   }
+  max-width: 100%;
+  height: 400px;
+}
 .image {
   width: 100%;
-  height: 90%;;
+  height: 90%;
 }
 
 .price {
