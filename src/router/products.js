@@ -1,6 +1,7 @@
 import ProductsList from '../components/products/ProductsList.vue';
 import ProductDetails from '../components/products/ProductDetails.vue';
-import NewProduct from '../components/products/NewProduct.vue';
+import NewProduct from '../components/products/NewProduct.vue'; 
+import EditProduct from '../components/products/EditProduct.vue'; 
 
 const productsRoutes = [{
         path: '/new-product',
@@ -16,7 +17,21 @@ const productsRoutes = [{
                 next();
             }
         }
-
+    },
+    {
+        path: '/edit-product/:productId',
+        name: "editProduct",
+        component: EditProduct,
+        beforeEnter: (to, from, next) => {
+            const admin = localStorage.getItem('role')
+            if (admin !== 'admin') {
+                next({
+                    name: 'login'
+                });
+            } else {
+                next();
+            }
+        }
     },
     {
         path: '/products',

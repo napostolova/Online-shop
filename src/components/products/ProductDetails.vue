@@ -6,9 +6,10 @@
         <img class="image" :src="product.imageUrl" :alt="product.title" />
       </article>
       <article class="description">{{ product.description }}</article>
-      <span class="price">  $ {{ product.price }}</span>
-      <div class="buttons">
+      <span class="price"> $ {{ product.price }}</span>
+      <div v-if="isAdmin == 'user'" class="buttons">
         <button
+          type="button"
           class="btn"
           @click="onBuyProduct(product._id)"
           :disabled="isAdded"
@@ -16,12 +17,38 @@
           <span class="material-icons"> shopping_cart </span> Add to cart
         </button>
         <button
+          type="button"
           class="btn"
           @click="onFavourite(product._id)"
           :disabled="isFavourited"
         >
           <span class="material-icons"> favorite_border </span> Add to favourite
         </button>
+      </div>
+      <div v-else-if="isAdmin == 'admin'" class="buttons">
+        <router-link
+          :to="{ name: 'editProduct', productId }"
+          class="link btn-edit"
+          >Edit</router-link
+        >
+
+        <el-button type="text" class="btn-delete" @click="onToggleDelete"
+          >Delete</el-button
+        >
+        <el-dialog
+          title="Warning"
+          :visible.sync="centerDialogVisible"
+          width="30%"
+          center
+        >
+          <span>Are you sure you want to delete the product? </span>
+          <span slot="footer" class="dialog-footer">
+            <el-button @click="centerDialogVisible = false">Cancel</el-button>
+            <el-button type="primary" @click="onDelete"
+              >Delete</el-button
+            >
+          </span>
+        </el-dialog>
       </div>
     </section>
   </div>
@@ -32,12 +59,18 @@ import {
   addFavouriteProduct,
   getOneById,
   buyProduct,
+  deleteProduct,
 } from "../../services/product";
+//import Dialog from "../Dialog.vue";
 
 export default {
+  components: {
+    //   Dialog,
+  },
   data() {
     return {
       loading: true,
+      centerDialogVisible: false,
       isFavourited: false,
       isAdded: false,
       product: {},
@@ -47,6 +80,13 @@ export default {
     productId() {
       return this.$route.params.productId;
     },
+    isAdmin() {
+      return this.$store.getters.getUser.role;
+    },
+  },
+  async created() {
+    this.product = await getOneById(this.productId);
+    this.loading = false;
   },
   methods: {
     async onFavourite(id) {
@@ -61,11 +101,16 @@ export default {
       await this.$store.dispatch("products/setOrderedProducts", id);
       this.isAdded = true;
     },
-  },
+    onToggleDelete() {
+      this.centerDialogVisible = true;
+      
+    },
+    async onDelete() {
+      const token = this.$store.getters.getUser.accessToken;
 
-  async created() {
-    this.product = await getOneById(this.productId);
-    this.loading = false;
+      await deleteProduct(this.productId, token);
+      this.$router.push({name: 'products'})
+    },
   },
 };
 </script>
@@ -91,21 +136,30 @@ export default {
 }
 .buttons {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  margin-top: 20px;
 }
 .btn:hover {
   cursor: pointer;
 }
 
-.btn {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+.btn-edit {
   background-color: rgb(22, 140, 219);
   color: white;
+  padding: 10px 20px;
+  margin: 10px;
   border-radius: 10px;
-  border-style: none;
-  margin: 10px 0 10px 0;
+  font-size: 22px;
+  text-transform: uppercase;
+}
+.btn-delete {
+  background-color: rgb(235, 57, 57);
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 19px;
+  text-transform: uppercase;
+  color: white;
+  border: none;
 }
 </style>

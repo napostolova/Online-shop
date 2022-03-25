@@ -21,6 +21,27 @@ export async function createProduct(data, token) {
     }
 
 }
+export async function editProduct(id, data, token) {
+    let response = await fetch(`${apiUrl}/api/products/${id}`, {
+        method: 'put',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Authorization': token      
+        },
+        body: JSON.stringify(data)
+    });
+    try {
+        let result = await response.json();
+        if (response.ok) {
+            return result;
+        } else {
+            return result.message;
+        }
+    } catch (err) {
+        console.log(err);
+    }
+    
+}
 
 export async function getAllProducts() {
     let response = await fetch(`${apiUrl}/api/products`);
@@ -126,4 +147,13 @@ export async function getOrderedProducts(token) {
     } catch (err) {
         console.log(err);
     }
+}
+
+export async function deleteProduct(id, token) {
+    return fetch(`${apiUrl}/api/products/${id}`, {
+        method: 'delete',
+        headers: {
+            'X-Authorization': token
+        }
+    });
 }

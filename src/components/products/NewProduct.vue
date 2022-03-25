@@ -75,7 +75,7 @@
         <p v-if="!$v.formData.price.numeric">Price must be number</p>
       </ErrorMessage>
 
-      <button type="button" class="btn" :disabled="isFilled">Create</button>
+      <input type="submit" class="btn" value="Create"/>
     </form>
   </div>
 </template>
