@@ -80,9 +80,7 @@ export default {
   max-width: 350px;
   margin: 20px 0;
 }
-.image {
-  width: 100%;
-}
+
 .description {
   margin: 20px;
 }

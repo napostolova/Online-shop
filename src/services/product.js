@@ -14,7 +14,7 @@ export async function createProduct(data, token) {
         if (response.ok) {
             return result;
         } else {
-            throw result.message;
+            return result.message;
         }
     } catch (err) {
         console.log(err);

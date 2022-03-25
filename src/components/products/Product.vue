@@ -58,9 +58,11 @@ export default {
 }
 .img-container {
    max-width: 100%;
+   height: 400px;
    }
 .image {
   width: 100%;
+  height: 90%;;
 }
 
 .price {

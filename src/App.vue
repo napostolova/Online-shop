@@ -25,18 +25,14 @@ export default {
   computed: {
     notification() {
       return this.$store.getters.showNotifications
-    }
+    },
+
   },
   methods: {
     reset(){
       this.$store.mutations.resetNotifications
     },
-      open4() {
-        this.$notify.error({
-          title: 'Error',
-          message: 'This is an error message'
-        });
-      },
+      
   }
   
 };
