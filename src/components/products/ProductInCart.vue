@@ -35,7 +35,7 @@ export default {
       const { accessToken } = this.$store.getters.getUser;
       console.log(`remove from cart ${id}`);
       deleteProductFromCart(id, accessToken);
-      // this.$store.commit('removeFromCart')
+      this.$store.dispatch('products/removeFromCart',id)
     },
   },
 };

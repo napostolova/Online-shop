@@ -44,7 +44,7 @@ const productsRoutes = [{
         component: ProductDetails,
         beforeEnter: (to, from, next) => {
             const user = localStorage.getItem('username')
-            if (to.name !== 'login' && user == 'undefined') {
+            if (to.name !== 'login' && (!user || user == 'undefined')) {
                 next({
                     name: 'login'
                 })

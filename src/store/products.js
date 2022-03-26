@@ -18,6 +18,11 @@ export default {
         },
         setMyOrders(state, orders) {
             state.cart.push(orders)
+        },
+        removeFromCart(state, product){
+           let cart=  state.cart.sort(p => p._id != product)
+           console.log(`mutations ${cart}`);
+           state.cart = cart
         }
     },
     actions: {
@@ -26,6 +31,10 @@ export default {
         },
         async setOrderedProducts(context, orders) {
             context.commit('setMyOrders', orders)
+        },
+        removeFromCart(context, product) {
+            console.log(product);
+            context.commit('removeFromCart', product)
         }
     }
 }
