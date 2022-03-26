@@ -61,12 +61,9 @@ import {
   buyProduct,
   deleteProduct,
 } from "../../services/product";
-//import Dialog from "../Dialog.vue";
+
 
 export default {
-  components: {
-    //   Dialog,
-  },
   data() {
     return {
       loading: true,
@@ -91,14 +88,14 @@ export default {
   methods: {
     async onFavourite() {
       const token = this.$store.getters.getUser.accessToken;
-      await this.$store.dispatch("products/setFavouriteProducts", this.product);
+     // await this.$store.dispatch("products/setFavouriteProducts", this.product);
       await addFavouriteProduct(this.productId, token);
       this.isFavourited = true;
     },
     async onBuyProduct(id) {
       const { accessToken } = this.$store.getters.getUser;
       await buyProduct(id, accessToken);
-      await this.$store.dispatch("products/setOrderedProducts", this.product);
+   //   await this.$store.dispatch("products/setOrderedProducts", this.product);
       this.isAdded = true;
     },
     onToggleDelete() {
@@ -106,7 +103,6 @@ export default {
     },
     async onDelete() {
       const token = this.$store.getters.getUser.accessToken;
-
       await deleteProduct(this.productId, token);
       this.$router.push({name: 'products'})
     },

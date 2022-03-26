@@ -157,3 +157,11 @@ export async function deleteProduct(id, token) {
         }
     });
 }
+export async function deleteProductFromCart(id, token) {
+    return fetch(`${apiUrl}/api/products/buy/${id}`, {
+        method: 'delete',
+        headers: {
+            'X-Authorization': token
+        }
+    });
+}
